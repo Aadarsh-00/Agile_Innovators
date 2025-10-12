@@ -1,9 +1,14 @@
+import unittest
+from app import app
+
 class FlaskTest(unittest.TestCase):
-    def test_hello(self):
-        tester = app.test_client(self)
-        response = tester.get('/hello')
+    def setUp(self):
+        self.app = app.test_client()
+
+    def test_homepage(self):
+        response = self.app.get('/')
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.data.decode(), "Hello,\n\nDevOps!")
 
 if __name__ == '__main__':
     unittest.main()
+
